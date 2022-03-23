@@ -1,25 +1,24 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider2 = require('@machinomy/hdwallet-provider');
 const { infuraProjectId, privateKey, etherscanApiKey } = require('./secrets.json');
+
+const LedgerProviderRinkeby = require('./ledger-provider-rinkeby');
+//const LedgerProviderMainnet = require('./ledger-provider-mainnet');
 
 module.exports = {
 	networks: {
 		rinkeby: {
 			provider: () => new HDWalletProvider(privateKey, `https://rinkeby.infura.io/v3/${infuraProjectId}`),
 			network_id: 4,       // rinkeby's id
-			gas: 5500000,        // rinkeby has a lower block limit than mainnet
+//			gas: 5500000,        // rinkeby has a lower block limit than mainnet
 			confirmations: 2,    // # of confs to wait between deployments. (default: 0)
 			timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
 			skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
 		},
-		rinkebyNanox: {
-			provider: () => new HDWalletProvider.ledgerBLE({
-				rpc: 'http://localhost:8545', // mandatory
-				path: "m/44'/60'/0'/0", // optional
-				numberOfAccounts: 1, // optional
-				accountsOffset: 0, // optional
-				askConfirm: false}), // optional,
+		rinkebyNano: {
+			provider: () => LedgerProviderRinkeby, // optional,
 			network_id: 4,       // rinkeby's id
-			gas: 5500000,        // rinkeby has a lower block limit than mainnet
+//			gas: 5500000,        // rinkeby has a lower block limit than mainnet
 			confirmations: 2,    // # of confs to wait between deployments. (default: 0)
 			timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
 			skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
