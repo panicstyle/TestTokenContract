@@ -17,7 +17,7 @@ const ledger = createLedgerSubprovider(getTransport, {
 
 const engine = new ProviderEngine();
 engine.addProvider(ledger);
-engine.addProvider(new RpcSubprovider({ rpcUrl: `https://rinkeby.infura.io/v3/${infuraProjectId}` }));
+engine.addProvider(new RpcSubprovider({ rpcUrl: `https://mainnet.infura.io/v3/${infuraProjectId}` }));
 engine.start();
 
 module.exports = engine;
